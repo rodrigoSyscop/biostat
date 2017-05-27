@@ -3,11 +3,10 @@
 # required tools
 BEDTOOLS=$(which bedtools)
 SAMTOOLS=$(which samtools)
-BWA=$(which bwa)
 
 # default directories
 SAMPLES_DIR="$HOME/data/eichh"
-
+OUTPUT_DIR="$HOME/all_samples_epan"
 # Task: to pair and to map all samples
 
 ## reference genome (full path)
@@ -38,21 +37,21 @@ for sample in $(ls $SAMPLES_DIR/*.fastq);do
     index_genome="${sample_index}_GC_${genome_basename}"
 
     # generates sam file
-    $BWA mem $genome_basename $sample > $SAMPLES_DIR/${index_genome}.sam
+    $BWA mem $GENOME_PATH $sample > $OUTPUT_DIR/${index_genome}.sam
 
-    cd $SAMPLES_DIR
+    cd $OUTPUT_DIR
 
     # generates bam file
-    $SAMTOOLS view -bhS ${index_genome}.sam > ${index_genome}.bam
+    $SAMTOOLS view -bhS ${index_genome}.sam > $OUTPUT_DIR/${index_genome}.bam
 
     # sorts bam file
-    $SAMTOOLS sort ${index_genome}.bam > ${index_genome}_sorted.bam
+    $SAMTOOLS sort ${index_genome}.bam > $OUTPUT_DIR/${index_genome}_sorted.bam
 
     # sample_index bam file
-    $SAMTOOLS sample_index ${index_genome}_sorted.bam
+    $SAMTOOLS index $OUTPUT_DIR/${index_genome}_sorted.bam
 
     # extract some statistics
-    $SAMTOOLS idxstats ${index_genome}_sorted.bam > ${index_genome}_sorted.txt
-    $SAMTOOLS flagstat ${index_genome}_sorted.bam > ${index_genome}_sorted_flag.bam
+    $SAMTOOLS idxstats $OUTPUT_DIR/${index_genome}_sorted.bam > $OUTPUT_DIR/${index_genome}_sorted.txt
+    $SAMTOOLS flagstat $OUTPUT_DIR/${index_genome}_sorted.bam > $OUTPUT_DIR/${index_genome}_sorted_flag.bam
 
 done
