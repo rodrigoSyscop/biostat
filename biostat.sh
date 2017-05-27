@@ -13,7 +13,7 @@ OUTPUT_DIR="$HOME/all_samples_epan"
 ## reference genome (full path)
 GENOME_PATH="$HOME/epan/GC_Arun4.fa"
 
-## that step is alrady done
+## that step is already done
 ## in case you need to redo it, comment out the block below
 
 #cd $(dirname $GENOME_PATH)
@@ -35,7 +35,7 @@ for sample in $(ls $SAMPLES_DIR/*.fastq);do
     sample_index=$(echo $sample_index|cut -d'.' -f1)
 
     # we will going to use this name a lot
-    index_genome="${sample_index}_GC_${genome_basename}"
+    index_genome="${sample_index}_${genome_basename}"
 
     # generates sam file
     $BWA mem $GENOME_PATH $sample > $OUTPUT_DIR/${index_genome}.sam
@@ -53,6 +53,6 @@ for sample in $(ls $SAMPLES_DIR/*.fastq);do
 
     # extract some statistics
     $SAMTOOLS idxstats $OUTPUT_DIR/${index_genome}_sorted.bam > $OUTPUT_DIR/${index_genome}_sorted.txt
-    $SAMTOOLS flagstat $OUTPUT_DIR/${index_genome}_sorted.bam > $OUTPUT_DIR/${index_genome}_sorted_flag.bam
+    $SAMTOOLS flagstat $OUTPUT_DIR/${index_genome}_sorted.bam > $OUTPUT_DIR/${index_genome}_sorted_flag.txt
 
 done
