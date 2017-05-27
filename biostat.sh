@@ -3,6 +3,7 @@
 # required tools
 BEDTOOLS=$(which bedtools)
 SAMTOOLS=$(which samtools)
+BWA=$(which bwa)
 
 # default directories
 SAMPLES_DIR="$HOME/data/eichh"
