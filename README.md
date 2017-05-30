@@ -1,31 +1,34 @@
 # biostat
-A set of scripts to help with [biostat](https://www.biostars.org/p/43677/).
+A set of scripts to help with [biostat](https://www.biostars.org/p/43677/) project.
 
-You have to download/clone it to your home dir, fix the `$GENOME_PATH` and `$SAMPLES_DIR` and good luck!
 
 ## How to use
 
-Clone this repo where you samples are.
+### Download
+Clone this repo on your home directory:
 ```bash
-git clone https://git@github.com:rodrigoSyscop/biostat.git
+git clone https://git@github.com:rodrigoSyscop/biostat.git biostat.app
 ```
 
-Get `$GENOME_PATH` and `$SAMPLES_DIR` properly set.
-Then you can choose run choosing one of below options:
-
+### Install 
 ```bash
 # run it straight
-bash ./biostat/biostat.sh
-
-# add executable permission to it
-chmod ug+x ./biostat/biostat.sh
-
-# then run it as before, but without bash in front of command
-./biostat/biostat.sh
-
-# create an alias
-alias biostat='bash ~/biostat/biostat.sh'
-
-# then just run
-biostat
+bash ./biostat.app/install.sh
 ```
+
+### Using it
+
+Put your files on `˜/biostat/input` directory and run the commands below:
+
+```bash
+# generate the .sam, .bam, and sorted files
+biostat
+
+# merge all *_sorted.txt files
+biostat_merge_idxstats
+
+# merge all *_sorted_flag.txt files
+biostat_merge_flags
+```
+
+All output files will be placed on `~/biostat/output`.
