@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 # you should run this script into the same
 # directory that flagstat files are
 
