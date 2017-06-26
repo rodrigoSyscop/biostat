@@ -117,7 +117,7 @@ done < $names
 all_variants=""
 for variant in $(ls ${prefix}/*.g.vcf);do
     variant=$(basename $variant)
-    all_variants="$all_variants --variant $v"
+    all_variants="$all_variants --variant $variant"
 done
 
 
